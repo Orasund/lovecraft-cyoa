@@ -21,12 +21,13 @@ main : Book State
 main =
     let
         chapters =
-            [ Chapter.Introduction.chapter
-            , Chapter.AnatomyOfDeath.chapter
+            [ Chapter.AnatomyOfDeath.chapter
             , Chapter.DangerousColors.chapter
             , Chapter.TheWatchers.chapter
             , Chapter.Darkness.chapter
             ]
+                |> List.indexedMap (\i chapter -> { chapter | title = "Kapitel " ++ String.fromInt (i + 1) ++ ": " ++ chapter.title })
+                |> (::) Chapter.Introduction.chapter
     in
     ElmBook.book "Abschrift des Manuskripts der Totenrufe von Kitab al-Azif"
         |> ElmBook.withStatefulOptions
@@ -51,6 +52,7 @@ main =
                 [ Html.node "style"
                     []
                     [ ".elm-book-action-log-preview-empty-wrapper,"
+                        ++ "#elm-book-search,"
                         ++ ".elm-book--wrapper--menu--footer{"
                         ++ "display:none"
                         ++ "}\n\n"
