@@ -1,0 +1,14 @@
+name: hook_echo
+
+on:
+  workflow_dispatch:
+    inputs:
+      message: 
+        required: true 
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print artifact_path
+        run: echo  The path is ${{ inputs.message }} 
